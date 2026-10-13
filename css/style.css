@@ -1,0 +1,225 @@
+/* ============ BoardBench — PCB / silkscreen aesthetic ============ */
+:root{
+  --pcb:#0a3d24;          /* solder-mask green */
+  --pcb-dark:#062315;
+  --pcb-deep:#04170e;
+  --silk:#e8f5e9;         /* silkscreen white */
+  --silk-dim:#9dbfa9;
+  --copper:#d9a441;       /* copper pads */
+  --trace:#1c6b41;
+  --led:#39ff88;
+  --warn:#ff5f56;
+  --card:#083019;
+  --card-line:#14532d;
+  --radius:14px;
+  --font-d:"Chakra Petch",sans-serif;
+  --font-m:"IBM Plex Mono",monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--pcb-deep);
+  color:var(--silk);
+  font-family:var(--font-m);
+  font-size:16px;
+  line-height:1.6;
+  background-image:
+    radial-gradient(ellipse at 20% -10%, rgba(57,255,136,.08), transparent 55%),
+    repeating-linear-gradient(0deg, transparent 0 39px, rgba(28,107,65,.18) 39px 40px),
+    repeating-linear-gradient(90deg, transparent 0 39px, rgba(28,107,65,.18) 39px 40px);
+}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+img{max-width:100%}
+button{font:inherit;cursor:pointer}
+a{color:inherit}
+
+/* ---------- header ---------- */
+.site-header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(4,23,14,.88);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--card-line);
+}
+.header-inner{display:flex;align-items:center;gap:28px;height:64px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-chip{
+  width:20px;height:20px;border-radius:4px;
+  background:var(--pcb);border:2px solid var(--trace);
+  box-shadow:inset 0 0 0 3px var(--pcb-deep);
+  position:relative;
+}
+.logo-chip::after{
+  content:"";position:absolute;inset:5px;border-radius:2px;
+  background:var(--led);animation:blink 2.4s infinite;
+}
+.logo-text{font-family:var(--font-d);font-weight:700;letter-spacing:.12em;font-size:1.05rem}
+.logo-accent{color:var(--copper)}
+.site-nav{display:flex;gap:22px;margin-left:auto;font-size:.9rem}
+.site-nav a{text-decoration:none;color:var(--silk-dim);transition:color .2s}
+.site-nav a:hover{color:var(--led)}
+.nav-cta{
+  background:var(--led);color:var(--pcb-deep);
+  border:none;border-radius:8px;padding:9px 18px;
+  font-family:var(--font-d);font-weight:700;letter-spacing:.05em;
+  transition:transform .15s, box-shadow .15s;
+}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(57,255,136,.35)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden;padding:96px 0 72px;border-bottom:1px solid var(--card-line)}
+.hero-traces{position:absolute;inset:0;width:100%;height:100%;opacity:.55}
+.trace{fill:none;stroke:var(--trace);stroke-width:3;stroke-linecap:round;
+  stroke-dasharray:14 10;animation:flow 8s linear infinite}
+.t2{animation-duration:11s;animation-direction:reverse}
+.t3{animation-duration:9s}
+.t4{animation-duration:13s;animation-direction:reverse}
+.via{fill:var(--copper);stroke:var(--pcb-deep);stroke-width:3;animation:pulse 3s ease-in-out infinite}
+.v2{animation-delay:.7s}.v3{animation-delay:1.4s}.v4{animation-delay:2.1s}
+.hero-inner{position:relative}
+.hero-kicker{color:var(--copper);letter-spacing:.18em;font-size:.85rem;text-transform:uppercase}
+.hero-title{
+  font-family:var(--font-d);font-weight:700;
+  font-size:clamp(2.4rem,6vw,4.4rem);line-height:1.08;
+  margin:18px 0 20px;text-transform:uppercase;letter-spacing:.02em;
+}
+.hl{color:var(--led);text-shadow:0 0 24px rgba(57,255,136,.45)}
+.hero-sub{max-width:620px;color:var(--silk-dim);font-size:1.05rem}
+.hero-sub strong{color:var(--silk)}
+.hero-actions{display:flex;gap:16px;margin:32px 0 48px;flex-wrap:wrap}
+.btn{
+  display:inline-block;border-radius:10px;padding:14px 28px;
+  font-family:var(--font-d);font-weight:700;letter-spacing:.06em;
+  text-decoration:none;border:2px solid transparent;transition:.18s;
+}
+.btn-primary{background:var(--copper);color:var(--pcb-deep)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(217,164,65,.4)}
+.btn-ghost{border-color:var(--trace);color:var(--silk)}
+.btn-ghost:hover{border-color:var(--led);color:var(--led)}
+.hero-stats{display:flex;gap:48px;flex-wrap:wrap}
+.hero-stats dt{font-family:var(--font-d);font-weight:700;font-size:2.2rem;color:var(--led)}
+.hero-stats dd{color:var(--silk-dim);font-size:.85rem;letter-spacing:.08em;text-transform:uppercase}
+
+/* ---------- sections ---------- */
+.section{padding:88px 0}
+.section-alt{background:linear-gradient(180deg,rgba(6,35,21,.7),rgba(4,23,14,.7));border-block:1px solid var(--card-line)}
+.section-head{margin-bottom:36px}
+.section-title{font-family:var(--font-d);font-weight:700;font-size:clamp(1.6rem,3.5vw,2.4rem);text-transform:uppercase;letter-spacing:.04em}
+.sec-num{color:var(--copper);font-size:.7em;margin-right:12px;vertical-align:middle}
+.section-sub{color:var(--silk-dim);margin-top:8px}
+
+/* ---------- filter chips ---------- */
+.filter-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:32px}
+.chip{background:var(--card);border:1px solid var(--card-line);color:var(--silk-dim);border-radius:999px;padding:8px 18px;font-size:.85rem;transition:.15s}
+.chip:hover{border-color:var(--trace);color:var(--silk)}
+.chip.is-active{background:var(--led);border-color:var(--led);color:var(--pcb-deep);font-weight:600}
+
+/* ---------- board cards ---------- */
+.board-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:22px}
+.empty-msg{color:var(--silk-dim);text-align:center;padding:40px 0}
+.board-card{
+  position:relative;background:var(--card);border:1px solid var(--card-line);
+  border-radius:var(--radius);padding:22px;text-align:left;color:inherit;
+  display:flex;flex-direction:column;gap:14px;
+  transition:transform .2s, border-color .2s, box-shadow .2s;
+  overflow:hidden;
+}
+.board-card::before{ /* silkscreen corner bracket */
+  content:"";position:absolute;top:10px;right:10px;width:26px;height:26px;
+  border-top:2px solid var(--trace);border-right:2px solid var(--trace);border-radius:0 8px 0 0;
+}
+.board-card{cursor:pointer}
+.board-card:focus-visible{outline:2px solid var(--led);outline-offset:3px}
+.board-card:hover{transform:translateY(-6px);border-color:var(--led);box-shadow:0 14px 30px rgba(0,0,0,.45)}
+.board-vis{
+  height:96px;border-radius:8px;background:linear-gradient(135deg,var(--pcb),var(--pcb-dark));
+  border:1px solid var(--trace);display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-d);font-weight:700;color:var(--led);letter-spacing:.1em;font-size:1.1rem;
+  text-shadow:0 0 12px rgba(57,255,136,.5);
+  background-image:radial-gradient(circle at 85% 20%, rgba(217,164,65,.25) 0 4px, transparent 5px),radial-gradient(circle at 85% 80%, rgba(217,164,65,.25) 0 4px, transparent 5px),linear-gradient(135deg,var(--pcb),var(--pcb-dark));
+}
+.board-name{font-family:var(--font-d);font-weight:700;font-size:1.15rem}
+.board-maker{color:var(--copper);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase}
+.board-quick{list-style:none;display:flex;flex-direction:column;gap:5px;font-size:.85rem;color:var(--silk-dim)}
+.board-quick b{color:var(--silk);font-weight:500;float:right}
+.board-tag{align-self:flex-start;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;background:rgba(57,255,136,.12);color:var(--led);border:1px solid rgba(57,255,136,.35);border-radius:999px;padding:3px 12px}
+
+/* ---------- compare ---------- */
+.compare-pickers{display:flex;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:28px}
+.pick-field{display:flex;flex-direction:column;gap:6px;flex:1;min-width:220px}
+.pick-field span{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--silk-dim)}
+select{
+  appearance:none;background:var(--card);border:1px solid var(--card-line);color:var(--silk);
+  border-radius:10px;padding:12px 16px;font:inherit;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2339ff88' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 16px center;
+}
+select:focus{outline:2px solid var(--led);outline-offset:1px}
+.vs-badge{font-family:var(--font-d);font-weight:700;color:var(--copper);padding-bottom:12px}
+.compare-table-wrap{overflow-x:auto;border:1px solid var(--card-line);border-radius:var(--radius);background:var(--card)}
+.compare-table{width:100%;border-collapse:collapse;font-size:.92rem;min-width:520px}
+.compare-table th,.compare-table td{padding:13px 18px;text-align:left;border-bottom:1px solid var(--card-line)}
+.compare-table thead th{font-family:var(--font-d);text-transform:uppercase;letter-spacing:.08em;color:var(--copper);background:rgba(6,35,21,.6)}
+.compare-table tbody th{color:var(--silk-dim);font-weight:500;width:30%}
+.compare-table td.win{color:var(--led);font-weight:600}
+.compare-table tr:last-child th,.compare-table tr:last-child td{border-bottom:none}
+
+/* ---------- starter kits ---------- */
+.kit-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px}
+.kit-card{background:var(--card);border:1px solid var(--card-line);border-radius:var(--radius);padding:26px;transition:.2s}
+.kit-card:hover{border-color:var(--copper);transform:translateY(-4px)}
+.kit-tag{color:var(--copper);font-size:.75rem;letter-spacing:.16em;text-transform:uppercase}
+.kit-card h3{font-family:var(--font-d);margin:8px 0 14px;font-size:1.2rem}
+.kit-list{list-style:none;display:flex;flex-direction:column;gap:8px;font-size:.9rem;color:var(--silk-dim)}
+.kit-list li::before{content:"→ ";color:var(--led)}
+.kit-price{margin-top:18px;font-family:var(--font-d);font-weight:700;color:var(--led);font-size:1.15rem}
+
+/* ---------- pinout ---------- */
+.pinout-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px}
+.pin-card{background:var(--card);border:1px solid var(--card-line);border-left:4px solid var(--copper);border-radius:var(--radius);padding:26px}
+.pin-num{font-family:var(--font-d);font-weight:700;color:var(--pcb-deep);background:var(--copper);border-radius:6px;padding:2px 12px;font-size:.9rem}
+.pin-card h3{font-family:var(--font-d);margin:14px 0 10px;font-size:1.1rem}
+.pin-card p{color:var(--silk-dim);font-size:.92rem}
+
+/* ---------- modal ---------- */
+.modal{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:24px}
+.modal[hidden]{display:none}
+.modal-backdrop{position:absolute;inset:0;background:rgba(2,10,6,.78);backdrop-filter:blur(4px)}
+.modal-card{
+  position:relative;background:var(--card);border:1px solid var(--trace);
+  border-radius:var(--radius);max-width:560px;width:100%;max-height:85vh;overflow-y:auto;
+  box-shadow:0 24px 60px rgba(0,0,0,.6);animation:pop .25s ease-out;
+}
+.modal-close{position:absolute;top:12px;right:14px;background:none;border:none;color:var(--silk-dim);font-size:1.7rem;line-height:1;transition:color .15s}
+.modal-close:hover{color:var(--warn)}
+.modal-body{padding:32px}
+.modal-body .board-vis{height:120px;margin-bottom:18px}
+.modal-body h3{font-family:var(--font-d);font-size:1.6rem;text-transform:uppercase}
+.modal-maker{color:var(--copper);letter-spacing:.14em;text-transform:uppercase;font-size:.8rem;margin-bottom:14px}
+.modal-desc{color:var(--silk-dim);margin-bottom:20px}
+.spec-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px 20px;font-size:.9rem}
+.spec-list li{display:flex;justify-content:space-between;gap:10px;border-bottom:1px dashed var(--card-line);padding-bottom:6px}
+.spec-list b{color:var(--led);font-weight:500;text-align:right}
+.modal-github{display:inline-block;margin-top:22px;color:var(--copper);text-decoration:none;border-bottom:1px dashed var(--copper);font-size:.88rem}
+.modal-github:hover{color:var(--led);border-color:var(--led)}
+
+/* ---------- footer ---------- */
+.site-footer{border-top:1px solid var(--card-line);background:var(--pcb-dark);padding:44px 0}
+.footer-inner{text-align:center;display:flex;flex-direction:column;gap:10px}
+.footer-brand{font-family:var(--font-d);font-weight:700;letter-spacing:.14em;font-size:1.1rem}
+.footer-note,.footer-copy{color:var(--silk-dim);font-size:.82rem}
+
+/* ---------- keyframes ---------- */
+@keyframes blink{0%,92%,100%{opacity:1}94%,98%{opacity:.15}}
+@keyframes flow{to{stroke-dashoffset:-240}}
+@keyframes pulse{0%,100%{opacity:.5;r:5}50%{opacity:1;r:7}}
+@keyframes pop{from{transform:scale(.92);opacity:0}to{transform:scale(1);opacity:1}}
+
+/* ---------- responsive ---------- */
+@media (max-width:760px){
+  .site-nav{display:none}
+  .header-inner{gap:12px}
+  .hero{padding:64px 0 52px}
+  .hero-stats{gap:28px}
+  .section{padding:60px 0}
+  .spec-list{grid-template-columns:1fr}
+}
